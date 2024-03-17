@@ -1,14 +1,15 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: BUSL-1.1
-
-# Full configuration options can be found at https://www.consul.io/docs/agent/config
+#-------------------------------------------------------------------------------
+# General Configuration
+#-------------------------------------------------------------------------------
+# Full configuration options can be found at:
+#   https://www.consul.io/docs/agent/config
 
 # datacenter
 # This flag controls the datacenter in which the agent is running. If not provided,
 # it defaults to "dc1". Consul has first-class support for multiple datacenters, but 
 # it relies on proper configuration. Nodes in the same datacenter should be on a 
 # single LAN.
-#datacenter = "my-dc-1"
+datacenter = "home-2024-dc"
 
 # data_dir
 # This flag provides a data directory for the agent to store state. This is required
@@ -24,15 +25,15 @@ data_dir = "/opt/consul"
 # servers. By default, this is "127.0.0.1", allowing only loopback connections. In
 # Consul 1.0 and later this can be set to a space-separated list of addresses to bind
 # to, or a go-sockaddr template that can potentially resolve to multiple addresses.
-#client_addr = "0.0.0.0"
+client_addr = "0.0.0.0"
 
 # ui
 # Enables the built-in web UI server and the required HTTP routes. This eliminates
 # the need to maintain the Consul web UI files separately from the binary.
 # Version 1.10 deprecated ui=true in favor of ui_config.enabled=true
-#ui_config{
-#  enabled = true
-#}
+ui_config{
+  enabled = true
+}
 
 # server
 # This flag is used to control if an agent is in server or client mode. When provided,
@@ -43,7 +44,7 @@ data_dir = "/opt/consul"
 # ensure availability in the case of node failure. Server nodes also participate in a
 # WAN gossip pool with server nodes in other datacenters. Servers act as gateways to
 # other datacenters and forward traffic as appropriate.
-#server = true
+server = true
 
 # Bind addr
 # You may use IPv4 or IPv6 but if you have multiple interfaces you must be explicit.
