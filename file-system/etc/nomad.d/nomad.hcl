@@ -94,16 +94,16 @@ client {
   #   path      = "/srv/nomad/plex/config"
   #   read_only = false
   # }
-  #
-  # #------------------------------
-  # # Volumes, Config (Torrent): Jackett
-  # #------------------------------
-  #
-  # host_volume "jackett-config" {
-  #   path      = "/srv/nomad/jackett/config"
-  #   read_only = false
-  # }
-  #
+
+  #------------------------------
+  # Volumes, Config (Torrent): Jackett
+  #------------------------------
+
+  host_volume "jackett-config" {
+    path      = "/srv/nomad/jackett/config"
+    read_only = false
+  }
+
   # #------------------------------
   # # Volumes, Config (Torrent): Qbittorrent
   # #------------------------------
