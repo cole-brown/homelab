@@ -48,15 +48,14 @@ server = true
 
 # Bind addr
 # You may use IPv4 or IPv6 but if you have multiple interfaces you must be explicit.
-bind_addr = "[::]" # Listen on all IPv6
-bind_addr = "0.0.0.0" # Listen on all IPv4
+# bind_addr = "[::]" # Listen on all IPv6
+# bind_addr = "0.0.0.0" # Listen on all IPv4
+# NOTE: Can also do this way...
+# bind_addr = "{{ GetInterfaceIP \"eth0\" }}"
 #
 # Advertise addr - if you want to point clients to a different address than bind or LB.
 #advertise_addr = "127.0.0.1"
-
-# NOTE: Can also do this way...
-# bind_addr        = "{{ GetInterfaceIP \"eth0\" }}"
-# advertise_addr   = "{{ GetInterfaceIP \"eth0\" }}"
+advertise_addr = "{{ GetInterfaceIP \"eth0\" }}"
 
 # Enterprise License
 # As of 1.10, Enterprise requires a license_path and does not have a short trial.
@@ -70,6 +69,7 @@ bind_addr = "0.0.0.0" # Listen on all IPv4
 # This cannot be used in conjunction with the legacy -bootstrap flag. This flag requires
 # -server mode.
 #bootstrap_expect=3
+bootstrap_expect = 1
 
 # encrypt
 # Specifies the secret key to use for encryption of Consul network traffic. This key must
