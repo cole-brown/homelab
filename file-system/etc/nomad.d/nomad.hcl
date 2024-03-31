@@ -104,15 +104,15 @@ client {
     read_only = false
   }
 
-  # #------------------------------
-  # # Volumes, Config (Torrent): Qbittorrent
-  # #------------------------------
-  #
-  # host_volume "qbittorrent-config" {
-  #   path      = "/srv/nomad/qbittorrent/config"
-  #   read_only = false
-  # }
-  #
+  #------------------------------
+  # Volumes, Config (Torrent): Qbittorrent
+  #------------------------------
+
+  host_volume "qbittorrent-config" {
+    path      = "/srv/nomad/qbittorrent/config"
+    read_only = false
+  }
+
   # # #------------------------------
   # # # Volumes, Config: Tailscale VPN
   # # #------------------------------
