@@ -18,9 +18,12 @@ path_dest_etc="/etc/nomad.d"
 # Script
 # ------------------------------------------------------------------------------
 
+# echo commands for debugging info
+set -x
+
 # Backup current?
 # No... KISS to start with.
-set -x
+
 # Push new files to path we can write to...
 rsync -av --mkpath --delete \
       "${path_src}/" \
@@ -33,4 +36,4 @@ ssh raspi -t "sudo chown nomad:nomad ${path_dest_home}/*; sudo chmod 755 ${path_
 ssh raspi -t "sudo mv ${path_dest_home}/* ${path_dest_etc}/"
 
 # Tell Nomad about it.
-ssh raspi -t "sudo systemctl reload nomad"
+ssh raspi -t "sudo systemctl restart nomad"
