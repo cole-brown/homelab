@@ -80,10 +80,15 @@ job "jackett" {
       # Docker Container
       driver = "docker"
 
+      # NOTE [2024-03-31]: Not needed currently/yet?
       # Use "UID:GID" if the volumes are owned by a non-root user/group.
       #   ~sudo groupadd --gid 2001 jackett~
       #   ~sudo useradd --no-create-home --uid 2001 --gid 2001 --no-user-group --shell /usr/sbin/nologin jackett~
-      # user   = "2001:2001" # "jackett:jackett"
+      # user = "2001:2001" # "jackett:jackett"
+      #   > $ id nomad media
+      #   > uid=999(nomad) gid=991(nomad) groups=991(nomad)
+      #   > uid=1001(media) gid=1001(media) groups=1001(media)
+      # user = "999:991"
 
       # These are Nomad Docker Bind Mounts.
       # Stored wherever the =host_volume= stanza in the Nomad Client config says they should be.
@@ -123,11 +128,20 @@ job "jackett" {
         # NOTE: Nomad can't manage a macvlan network. It forwards host ports if you do a network
         # stanza with ~to = "<port-num>"~...
         network_mode = "raspi_vnet"
-        ipv4_address = "192.168.50.6"
+        ipv4_address = "192.168.50.10"
       }
 
       env {
         TZ = "US/Pacific"
+
+        # User / Group Identifiers
+        # https://github.com/linuxserver/docker-jackett?tab=readme-ov-file#user--group-identifiers
+        #   > $ id nomad media
+        #   > uid=999(nomad) gid=991(nomad) groups=991(nomad)
+        #   > uid=1001(media) gid=1001(media) groups=1001(media)
+        # NOTE [2024-03-31]: Not needed currently/yet?
+        # PUID = "999"
+        # PGID = "991"
 
         # Allows Jackett to update inside of the container.
         # Currently recommended by Jackett: https://hub.docker.com/r/linuxserver/jackett
